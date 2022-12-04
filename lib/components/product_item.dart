@@ -19,6 +19,7 @@ class ProductItem extends StatelessWidget {
           backgroundColor: Colors.black87,
           leading: IconButton(
             onPressed: () {},
+            color: Theme.of(context).colorScheme.secondary,
             icon: Icon(
               Icons.favorite,
             ),
@@ -29,6 +30,7 @@ class ProductItem extends StatelessWidget {
           ),
           trailing: IconButton(
             onPressed: () {},
+            color: Theme.of(context).colorScheme.secondary,
             icon: Icon(
               Icons.shopping_cart,
             ),
