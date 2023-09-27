@@ -6,7 +6,10 @@ import 'package:shop/utils/app_roputes.dart';
 class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context);
+    final product = Provider.of<Product>(
+      context,
+      listen: false,
+    );
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -24,13 +27,15 @@ class ProductItem extends StatelessWidget {
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black87,
-          leading: IconButton(
-            onPressed: () {
-              product.toggleFavorite();
-            },
-            color: Theme.of(context).colorScheme.secondary,
-            icon: Icon(
-                product.isFavorite ? Icons.favorite : Icons.favorite_border),
+          leading: Consumer<Product>(
+            builder: (ctx, product, _) => IconButton(
+              onPressed: () {
+                product.toggleFavorite();
+              },
+              color: Theme.of(context).colorScheme.secondary,
+              icon: Icon(
+                  product.isFavorite ? Icons.favorite : Icons.favorite_border),
+            ),
           ),
           title: Text(
             product.title,
