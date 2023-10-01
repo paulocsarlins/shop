@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class Badgee extends StatelessWidget {
   final Widget child;
@@ -26,14 +23,14 @@ class Badgee extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               color: color ?? Theme.of(context).colorScheme.secondary,
             ),
-            constraints: BoxConstraints(
+            constraints: const BoxConstraints(
               minHeight: 16,
               minWidth: 16,
             ),
             child: Text(
               value,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 10,
               ),
             ),
