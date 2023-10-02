@@ -5,7 +5,7 @@ import 'package:shop/models/product_list.dart';
 import 'package:shop/pages/cart_page.dart';
 import 'package:shop/pages/product_detail_page.dart';
 import 'package:shop/pages/products_overview_page.dart';
-import 'package:shop/utils/app_roputes.dart';
+import 'package:shop/utils/app_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,18 +23,21 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => Cart(),
-        )
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple).copyWith(secondary: Colors.deepOrange),
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            primary: Colors.purple,
+            secondary: Colors.deepOrange,
+          ),
           fontFamily: 'Lato',
         ),
         home: const ProductsOverviewPage(),
         routes: {
-          AppRoutes.PRODUCT_DETAIL: (ctx) => const ProductDeatilPage(),
-          AppRoutes.CART: (ctx) => const CartPage(),
+          AppRoutes.productDetail: (ctx) => const ProductDetailPage(),
+          AppRoutes.cart: (ctx) => const CartPage(),
         },
         debugShowCheckedModeBanner: false,
       ),

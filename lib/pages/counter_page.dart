@@ -12,6 +12,7 @@ class _CounterPageState extends State<CounterPage> {
   @override
   Widget build(BuildContext context) {
     final provider = CounterProvider.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Exemplo Contador'),
@@ -24,7 +25,7 @@ class _CounterPageState extends State<CounterPage> {
               setState(() {
                 provider?.state.inc();
               });
-              print(provider?.state.value);
+              // print(provider?.state.value);
             },
             icon: const Icon(Icons.add),
           ),
