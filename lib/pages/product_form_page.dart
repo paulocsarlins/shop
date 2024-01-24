@@ -11,6 +11,14 @@ class _ProductFormPageState extends State<ProductFormPage> {
   @override
   Widget build(BuildContext context) {
     final _priceFocus = FocusNode();
+    final _descriptionFocus = FocusNode();
+
+    @override
+    void dispose() {
+      super.dispose();
+      _priceFocus.dispose();
+      _descriptionFocus.dispose();
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -39,6 +47,18 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 keyboardType: TextInputType.numberWithOptions(
                   decimal: true,
                 ),
+                onFieldSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_descriptionFocus);
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Descrição',
+                ),
+                textInputAction: TextInputAction.next,
+                focusNode: _descriptionFocus,
+                keyboardType: TextInputType.multiline,
+                maxLines: 3,
               ),
             ],
           ),
