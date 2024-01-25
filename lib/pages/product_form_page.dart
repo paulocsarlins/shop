@@ -25,14 +25,21 @@ class _ProductFormPageState extends State<ProductFormPage> {
     }
 
     void _submitForm() {
+      final isValid = _formKey.currentState?.validate() ?? false;
+
+      if (!isValid) {
+        return;
+      }
+
       _formKey.currentState?.save();
-            final newProduct = Product(
-        id: Random().nextDouble.toString(), 
-        name: _formData['name'] as String, 
-        description: _formData['description'] as String, 
-        price: _formData['price'] as double, 
+
+      final newProduct = Product(
+        id: Random().nextDouble.toString(),
+        name: _formData['name'] as String,
+        description: _formData['description'] as String,
+        price: _formData['price'] as double,
         imageUrl: _formData['imageUrl'] as String,
-        );
+      );
     }
 
     @override
@@ -75,6 +82,19 @@ class _ProductFormPageState extends State<ProductFormPage> {
                   FocusScope.of(context).requestFocus(_priceFocus);
                 },
                 onSaved: (name) => _formData['name'] = name ?? '',
+                validator: (_name) {
+                  final name = _name ?? '';
+
+                  if (name.trim().isEmpty) {
+                    return 'Nome é obrigatório';
+                  }
+
+                  if (name.trim().length < 3) {
+                    return 'Nome preciwsa no mínimo de 3 letras';
+                  }
+
+                  return null;
+                },
               ),
               TextFormField(
                 decoration: InputDecoration(
@@ -88,7 +108,8 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 onFieldSubmitted: (_) {
                   FocusScope.of(context).requestFocus(_descriptionFocus);
                 },
-                onSaved: (price) => _formData['price'] = double.parse(price ?? '0'),
+                onSaved: (price) =>
+                    _formData['price'] = double.parse(price ?? '0'),
               ),
               TextFormField(
                 decoration: InputDecoration(
@@ -98,7 +119,8 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 focusNode: _descriptionFocus,
                 keyboardType: TextInputType.multiline,
                 maxLines: 3,
-                onSaved: (description) => _formData['description'] = description ?? '',
+                onSaved: (description) =>
+                    _formData['description'] = description ?? '',
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -113,7 +135,8 @@ class _ProductFormPageState extends State<ProductFormPage> {
                       focusNode: _imageUrlFocus,
                       controller: _imageUrlController,
                       onFieldSubmitted: (_) => _submitForm(),
-                      onSaved: (imageUrl) => _formData['imageUrl'] = imageUrl ?? '',
+                      onSaved: (imageUrl) =>
+                          _formData['imageUrl'] = imageUrl ?? '',
                     ),
                   ),
                   Container(
