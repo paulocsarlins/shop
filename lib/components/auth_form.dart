@@ -15,11 +15,8 @@ class AuthForm extends StatefulWidget {
 class _AuthFormState extends State<AuthForm> {
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
   bool _isLoading = false;
-
   AuthMode _authMode = AuthMode.login;
-
   final Map<String, String> _authData = {
     'email': '',
     'password': '',
@@ -60,24 +57,25 @@ class _AuthFormState extends State<AuthForm> {
     if (!isValid) {
       return;
     }
+
     setState(() => _isLoading = true);
 
     _formKey.currentState?.save();
-
     Auth auth = Provider.of(context, listen: false);
 
     try {
       if (_isLogin()) {
+        // Login
         await auth.login(
           _authData['email']!,
           _authData['password']!,
         );
       } else {
+        // Registrar
         await auth.signup(
           _authData['email']!,
           _authData['password']!,
         );
-        //registrar
       }
     } on AuthException catch (error) {
       _showErrorDialog(error.toString());

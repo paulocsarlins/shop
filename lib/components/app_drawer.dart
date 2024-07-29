@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop/utils/app_routes.dart';
 
 class AppDrawer extends StatelessWidget {
-  const AppDrawer({super.key});
+  const AppDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,31 +10,37 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: [
           AppBar(
-            title: Text('Bem vindo Usuário!'),
+            title: const Text('Bem vindo Usuário!'),
             automaticallyImplyLeading: false,
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.shop),
-            title: Text('Loja'),
+            leading: const Icon(Icons.shop),
+            title: const Text('Loja'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(AppRoutes.auth_or_home);
+              Navigator.of(context).pushReplacementNamed(
+                AppRoutes.authOrHome,
+              );
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.payment),
-            title: Text('Pedidos'),
+            leading: const Icon(Icons.payment),
+            title: const Text('Pedidos'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(AppRoutes.orders);
+              Navigator.of(context).pushReplacementNamed(
+                AppRoutes.orders,
+              );
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.edit),
-            title: Text('Gerenciar Produtos'),
+            leading: const Icon(Icons.edit),
+            title: const Text('Gerenciar Produtos'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(AppRoutes.products);
+              Navigator.of(context).pushReplacementNamed(
+                AppRoutes.products,
+              );
             },
           ),
         ],

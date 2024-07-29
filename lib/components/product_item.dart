@@ -7,7 +7,10 @@ import 'package:shop/utils/app_routes.dart';
 
 class ProductItem extends StatelessWidget {
   final Product product;
-  const ProductItem(this.product, {super.key});
+  const ProductItem(
+    this.product, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,43 +20,38 @@ class ProductItem extends StatelessWidget {
         backgroundImage: NetworkImage(product.imageUrl),
       ),
       title: Text(product.name),
-      trailing: Container(
+      trailing: SizedBox(
         width: 100,
         child: Row(
           children: [
             IconButton(
-              icon: Icon(Icons.edit),
-              color: Theme.of(context).primaryColor,
+              icon: const Icon(Icons.edit),
+              color: Theme.of(context).colorScheme.primary,
               onPressed: () {
                 Navigator.of(context).pushNamed(
-                  AppRoutes.product_form,
+                  AppRoutes.productForm,
                   arguments: product,
                 );
               },
             ),
             IconButton(
-              icon: Icon(Icons.delete),
+              icon: const Icon(Icons.delete),
               color: Theme.of(context).errorColor,
               onPressed: () {
                 showDialog(
                   context: context,
                   builder: (ctx) => AlertDialog(
-                    title: Text('Excluir produto?'),
-                    content: Text('Tem certeza?'),
+                    title: const Text('Excluir produto?'),
+                    content: const Text('Tem certeza?'),
                     actions: [
                       TextButton(
-                        child: Text('Não'),
+                        child: const Text('Não'),
                         onPressed: () => Navigator.of(ctx).pop(),
                       ),
                       TextButton(
-                          child: Text('Sim'),
-                          onPressed: () {
-                            Provider.of<ProductList>(
-                              context,
-                              listen: false,
-                            ).removeProduct(product);
-                            Navigator.of(ctx).pop();
-                          })
+                        child: const Text('Sim'),
+                        onPressed: () => Navigator.of(ctx).pop(true),
+                      ),
                     ],
                   ),
                 ).then((value) async {
